@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Builder(
         builder: (context) {
           final isSmallScreen = MediaQuery.of(context).size.width < 600;
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
                       "HomePage",
                       style: TextStyle(color: Colors.black, fontSize: 15),
                     ),
-                    iconTheme:const IconThemeData(color: Colors.black),
+                    iconTheme: const IconThemeData(color: Colors.black),
                   )
                 : null,
             // drawer: SideBar(controller: _controller),
