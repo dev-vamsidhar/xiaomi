@@ -7,7 +7,7 @@ class PreviousOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [Text("No previous orders ")],
+      children: const [Text("No previous orders ")],
     );
   }
 }

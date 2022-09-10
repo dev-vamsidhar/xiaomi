@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/cart.view.dart';
-import 'package:frontend/views/ordercheckout.view.dart';
 import 'package:frontend/views/previousorder.view.dart';
 import 'package:frontend/views/products.view.dart';
 import 'package:get/get.dart';
@@ -46,7 +45,7 @@ class HomePage extends StatelessWidget {
                       "HomePage",
                       style: TextStyle(color: Colors.black, fontSize: 15),
                     ),
-                    iconTheme: IconThemeData(color: Colors.black),
+                    iconTheme:const IconThemeData(color: Colors.black),
                   )
                 : null,
             // drawer: SideBar(controller: _controller),
@@ -173,13 +172,13 @@ class _Screens extends StatelessWidget {
         final pageTitle = _getTitleByIndex(controller.selectedIndex);
         switch (controller.selectedIndex) {
           case 0:
-            return PreviousOrder();
+            return const PreviousOrder();
           case 1:
             return ProductSelection(
               sidebarcontroller: controller,
             );
           case 2:
-            return Cart();
+            return const Cart();
           default:
             return Text(
               pageTitle,

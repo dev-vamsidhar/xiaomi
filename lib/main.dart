@@ -1,19 +1,15 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:frontend/helpers/connectivity.helper.dart';
-import 'package:frontend/views/auth.view.dart';
 import 'package:frontend/views/splash.view.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:resize/resize.dart';
 
 void main() async {
   runApp(const MyApp());
-  var path = Directory.current.path;
-  Hive.init(path);
+  await Hive.initFlutter();
   await Hive.openBox('temp');
   Get.put(ConnectivityController());
 }
@@ -30,7 +26,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.orange,
           ),
-          home: Splash());
+          home: const Splash());
     });
   }
 }

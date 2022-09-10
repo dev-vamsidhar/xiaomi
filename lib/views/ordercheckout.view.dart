@@ -8,7 +8,6 @@ class OrderCheckout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      final isSmallScreen = MediaQuery.of(context).size.width < 600;
       return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -18,7 +17,7 @@ class OrderCheckout extends StatelessWidget {
               onTap: () {
                 Get.back();
               },
-              child: Icon(Icons.arrow_back)),
+              child: const Icon(Icons.arrow_back)),
           centerTitle: true,
           title: const Text(
             "Order Checkout",
@@ -29,8 +28,8 @@ class OrderCheckout extends StatelessWidget {
         body: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+           const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 "Operator",
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
@@ -53,8 +52,8 @@ class OrderCheckout extends StatelessWidget {
                         controller: TextEditingController(), hintText: "Email"))
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+         const   Padding(
+              padding:  EdgeInsets.all(8.0),
               child: Text(
                 "Order Summary:",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
@@ -65,16 +64,16 @@ class OrderCheckout extends StatelessWidget {
             summaryitem(item: "Taxes", value: "13.99"),
             summaryitem(
                 item: "Discount", value: "39.99", color: Colors.green[700]),
-            Divider(),
+       const     Divider(),
             summaryitem(item: "Total", value: "180.98", size: 17),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+    const        Divider(),
+         const   Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                   "We will send the confirmation when your item(s) are on the way! Hope you enjoy your purchase"),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+          const  Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text("Thank you!"),
             ),
             Align(
@@ -96,8 +95,8 @@ class OrderCheckout extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Center(
+                          children:const [
+                             Center(
                                 child: Text(
                               "Pay",
                               style: TextStyle(

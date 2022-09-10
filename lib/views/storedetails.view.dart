@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants/constants.dart';
+import 'package:frontend/helpers/connectivity.helper.dart';
+import 'package:frontend/helpers/logger.dart';
 import 'package:frontend/views/home.view.dart';
 import 'package:get/get.dart';
 
@@ -148,7 +152,7 @@ class _StoreDetailsState extends State<StoreDetails> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 30, horizontal: 10),
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
                           Get.offAll(HomePage());
                         },
                         child: MouseRegion(

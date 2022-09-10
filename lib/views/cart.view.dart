@@ -13,7 +13,7 @@ class Cart extends StatelessWidget {
             child: Container(
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),
-              child: Text("No items in the cart"),
+              child:const Text("No items in the cart"),
             ),
           )
         ],

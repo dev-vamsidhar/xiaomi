@@ -32,7 +32,7 @@ class Auth extends StatelessWidget {
                       : MainAxisAlignment.center,
                   children: [
                     Get.width > 700
-                        ? Container(
+                        ? SizedBox(
                             height: Get.width / 3,
                             child: Lottie.asset("assets/lotties/pos.json"))
                         : Container(),
@@ -60,7 +60,7 @@ class Auth extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.orange,
                   borderRadius: BorderRadius.circular(10)),
-              child: Center(
+              child:const Center(
                   child: Text(
                 "Log in",
                 style: TextStyle(color: Colors.white),
@@ -77,7 +77,7 @@ class Auth extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
+          boxShadow: const[
             BoxShadow(
                 color: Colors.grey,
                 spreadRadius: 2,
@@ -120,7 +120,7 @@ class Auth extends StatelessWidget {
               cursor: SystemMouseCursors.click,
               child: InkWell(
                 onTap: () {},
-                child: Center(
+                child:const Center(
                     child: Icon(
                   FontAwesomeIcons.google,
                   color: Colors.red,

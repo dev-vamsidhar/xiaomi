@@ -10,7 +10,7 @@ import 'package:frontend/views/auth.view.dart';
 import 'package:get/get.dart';
 
 class Splash extends StatefulWidget {
-  const   Splash({super.key});
+  const Splash({super.key});
 
   @override
   State<Splash> createState() => _SplashState();
@@ -24,11 +24,10 @@ class _SplashState extends State<Splash> {
   }
 
   void checkLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     await Future.delayed(const Duration(seconds: 3));
     String token = await getKey(key: "token");
     log("Token is $token", Sevearity.low);
-    if (!token.isEmpty) {
+    if (token.isEmpty) {
       Get.offAll(Auth());
       return;
     }
