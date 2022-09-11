@@ -179,7 +179,7 @@ class _Screens extends StatelessWidget {
               sidebarcontroller: controller,
             );
           case 2:
-            return const Cart();
+            return  Cart();
           default:
             return Text(
               pageTitle,

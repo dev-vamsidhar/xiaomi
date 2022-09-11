@@ -8,7 +8,6 @@ Future<bool> setKey({required String key, required var value}) async {
 
 Future<dynamic> getKey({required String key}) async {
   Box box = await Hive.openBox("temp");
-
   var value = await box.get(key);
   if (value == null) {
     return "";
