@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/helpers/hive.helper.dart';
+import 'package:frontend/views/auth.view.dart';
 import 'package:frontend/views/cart.view.dart';
 import 'package:frontend/views/previousorder.view.dart';
 import 'package:frontend/views/products.view.dart';
@@ -151,6 +153,7 @@ class SideBar extends StatelessWidget {
           icon: Icons.settings,
           label: 'Settings',
         ),
+        const SidebarXItem(icon: Icons.logout, label: "LogOut")
       ],
     );
   }
@@ -179,7 +182,21 @@ class _Screens extends StatelessWidget {
               sidebarcontroller: controller,
             );
           case 2:
-            return  Cart();
+            return Cart();
+          case 5:
+            return InkWell(
+              onTap: () {
+                cleardb();
+                Get.offAll(Auth());
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Text("Logout"),
+                ),
+              ),
+            );
           default:
             return Text(
               pageTitle,
@@ -203,6 +220,8 @@ String _getTitleByIndex(int index) {
       return 'Profile';
     case 4:
       return 'Settings';
+    case 5:
+      return "Logout";
 
     default:
       return 'Not found page';

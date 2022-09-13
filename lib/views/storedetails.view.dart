@@ -1,15 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants/constants.dart';
-import 'package:frontend/helpers/connectivity.helper.dart';
-import 'package:frontend/helpers/logger.dart';
+import 'package:frontend/controllers/auth.controller.dart';
 import 'package:frontend/views/home.view.dart';
 import 'package:get/get.dart';
 
 class StoreDetails extends StatefulWidget {
-  StoreDetails({super.key});
+  const StoreDetails({super.key});
 
   @override
   State<StoreDetails> createState() => _StoreDetailsState();
@@ -113,8 +109,8 @@ class _StoreDetailsState extends State<StoreDetails> {
                               }),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
+                      const Padding(
+                        padding: EdgeInsets.all(15.0),
                         child: Icon(Icons.keyboard_arrow_down_sharp),
                       )
                     ],
@@ -153,7 +149,8 @@ class _StoreDetailsState extends State<StoreDetails> {
                           vertical: 30, horizontal: 10),
                       child: InkWell(
                         onTap: () async {
-                          Get.offAll(HomePage());
+                          Get.find<AuthenticationController>().updateuser(storename: storename.text, storetype: storeType, posid: posId.text);
+                       
                         },
                         child: MouseRegion(
                           cursor: SystemMouseCursors.click,

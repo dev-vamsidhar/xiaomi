@@ -1,3 +1,6 @@
+import 'package:frontend/constants/server.constants.dart';
+import 'package:frontend/helpers/apicalls.dart';
+import 'package:frontend/helpers/hive.helper.dart';
 import 'package:frontend/helpers/logger.dart';
 import 'package:frontend/model/cart.model.dart';
 import 'package:get/get.dart';
@@ -25,23 +28,51 @@ class CartController extends GetxController {
   }
 
   Future addtoCart(CartModel item) async {
-    var uuid = const Uuid();
-    Map<String, dynamic> data = item.tojson(item);
+    loading();
+    try {
+      var uuid = const Uuid();
+      String uid = uuid.v4();
+      Map<String, dynamic> data = item.tojson(item);
+      Box box = await Hive.openBox("cart");
+      data['id'] = uid;
+      data['miid'] = await getKey(key: "miid");
+      await postCall(postUrlpath: addtocart, body: data);
+      await box.put(uid, data);
+      getCartItems();
+      update();
+      dismissloading();
+      return;
+    } catch (e) {
+      dismissloading();
+    }
+  }
+
+  Future getCartitemsfromapi() async {
     Box box = await Hive.openBox("cart");
-    String uid = uuid.v4();
-    data['id'] = uid;
-    await box.put(uid, data);
-    getCartItems();
-    update();
-    return;
+    String mid = await getKey(key: "miid");
+    var data =
+        await postCall(postUrlpath: "app/getcartitems", body: {"miid": mid});
+    if (data["status"] == "Cart data fetched sucessfully") {
+      for (var element in data['data']) {
+        await box.put(element['id'], element);
+      }
+    }
   }
 
   Future deleteCartItem(String key) async {
-    Box box = await Hive.openBox("cart");
-    await box.delete(key);
-    await getCartItems();
-    update();
-    return;
+    loading();
+    try {
+      Box box = await Hive.openBox("cart");
+      await box.delete(key);
+      await getCartItems();
+      await postCall(postUrlpath: "app/deletecart", body: {"id": key});
+      update();
+      dismissloading();
+      return;
+    } catch (e) {
+      dismissloading();
+      return;
+    }
   }
 
   Future deleteall() async {

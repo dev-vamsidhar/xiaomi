@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/constants/constants.dart';
 import 'package:frontend/controllers/cart.controller.dart';
 import 'package:frontend/helpers/widgets.helper.dart';
 import 'package:frontend/model/cart.model.dart';
@@ -78,8 +79,8 @@ class _ProductSelectionState extends State<ProductSelection> {
         body: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 "Create an Order",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
@@ -175,7 +176,7 @@ class _ProductSelectionState extends State<ProductSelection> {
             ),
             if (homedelivery)
               const Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Text(
                   "Delivery Details",
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
@@ -239,10 +240,13 @@ class _ProductSelectionState extends State<ProductSelection> {
                         child: const Icon(Icons.qr_code_scanner_rounded)))
               ],
             ),
+            sh20,
+            sh20,
+            sh20,
             Align(
               alignment: Alignment.topRight,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Wrap(
+                // mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   InkWell(
                     onTap: () async {
@@ -271,7 +275,7 @@ class _ProductSelectionState extends State<ProductSelection> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 30, horizontal: 10),
+                          vertical: 5, horizontal: 10),
                       child: MouseRegion(
                         cursor: SystemMouseCursors.click,
                         child: Container(
@@ -304,12 +308,12 @@ class _ProductSelectionState extends State<ProductSelection> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: InkWell(
                       onTap: () {
-                        _cartController.deleteall();
-                        // Get.to(OrderCheckout());
+                        // _cartController.deleteall();
+                        Get.to(OrderCheckout());
                         return;
                       },
                       child: MouseRegion(
@@ -319,13 +323,13 @@ class _ProductSelectionState extends State<ProductSelection> {
                               color: Colors.orange,
                               borderRadius: BorderRadius.circular(10)),
                           // height: 30,
-                          width: 130,
+                          width: 100,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Center(
+                              children: const [
+                                Center(
                                     child: Text(
                                   "Proceed",
                                   style: TextStyle(

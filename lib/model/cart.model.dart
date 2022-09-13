@@ -39,7 +39,13 @@ class CartModel {
       "size": item.size,
       "id": item.id,
       "quantity": item.quantity,
-      "price": item.price
+      "price": item.price,
+      "homedelivery": item.homedelivery,
+      "addressline1": item.addressline1,
+      "state": item.state,
+      "country": item.country,
+      "landmark": item.landmark,
+      "pincode": item.pincode
     };
   }
 

@@ -19,3 +19,8 @@ Future<bool> haskey({required String key}) async {
   Box box = await Hive.openBox("temp");
   return box.containsKey(key);
 }
+
+Future cleardb() async {
+  Box box = await Hive.openBox("temp");
+  box.clear();
+}

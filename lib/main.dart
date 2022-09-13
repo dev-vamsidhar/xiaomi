@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:frontend/controllers/auth.controller.dart';
 import 'package:frontend/controllers/cart.controller.dart';
 import 'package:frontend/helpers/connectivity.helper.dart';
 import 'package:frontend/views/splash.view.dart';
@@ -13,6 +14,7 @@ void main() async {
   await Hive.openBox('temp');
   Get.put(ConnectivityController());
   Get.put(CartController());
+  Get.put(AuthenticationController());
 }
 
 class MyApp extends StatelessWidget {
