@@ -24,7 +24,7 @@ class CartModel {
   String price;
   String size;
   String quantity;
-  bool homedelivery;
+  String homedelivery;
   String addressline1;
   String state;
   String country;

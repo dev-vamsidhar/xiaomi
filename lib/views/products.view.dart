@@ -259,7 +259,7 @@ class _ProductSelectionState extends State<ProductSelection> {
                           size: size.text,
                           price: "\$4923.00",
                           quantity: quantity.text,
-                          homedelivery: homedelivery,
+                          homedelivery: homedelivery.toString(),
                           addressline1: addressline1.text,
                           state: state.text,
                           country: country.text,

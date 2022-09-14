@@ -22,7 +22,6 @@ class CartController extends GetxController {
     for (var element in keys) {
       cartitems.add(CartModel.fromjson(box.get(element)));
     }
-
     log(cartitems);
     update();
   }

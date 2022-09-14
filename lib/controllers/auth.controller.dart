@@ -25,6 +25,7 @@ class AuthenticationController extends GetxController {
         await setKey(key: 'miid', value: data['miid']);
         await getuserinitialdata();
         String storename = await getKey(key: "storename");
+        log(storename);
         if (storename.isNotEmpty) {
           toast(data['status']);
           dismissloading();
@@ -39,6 +40,8 @@ class AuthenticationController extends GetxController {
       toast(data['status']);
       return;
     }
+    dismissloading();
+    toast("Something went wrong. Please try again later");
   }
 
   void updateuser(
@@ -77,14 +80,17 @@ class AuthenticationController extends GetxController {
     Get.find<CartController>().getCartitemsfromapi();
 
     ///Get profile data
-    String miid = await getKey(key: "token");
+    String miid = await getKey(key: "miid");
     var res =
         await postCall(postUrlpath: "app/getprofile", body: {"miid": miid});
+    log(res);
     if (res['status'] != null) {
-      setKey(key: "storename", value: res.data[0]['storename']);
-      setKey(key: "storetype", value: res.data[0]['storetype']);
-      setKey(key: "posid", value: res.data[0]['posid']);
-    } else {
+      if (res["data"].length > 0) {
+        setKey(key: "storename", value: res["data"][0]['storename']);
+        setKey(key: "storetype", value: res["data"][0]['storetype']);
+        setKey(key: "posid", value: res["data"][0]['posid']);
+      }
+    } else {  
       toast("Something went wrong while fetching data. Please try again later");
     }
 

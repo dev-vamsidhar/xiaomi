@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/checkout.controller.dart';
+import 'package:frontend/helpers/hive.helper.dart';
+import 'package:frontend/helpers/logger.dart';
 import 'package:frontend/helpers/widgets.helper.dart';
+import 'package:frontend/views/payment.view.dart';
 import 'package:get/get.dart';
 
 class OrderCheckout extends StatelessWidget {
@@ -7,6 +11,7 @@ class OrderCheckout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CheckoutController checkoutController = Get.put(CheckoutController());
     return Builder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
@@ -28,18 +33,21 @@ class OrderCheckout extends StatelessWidget {
         body: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-           const Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                 "Operator",
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17),
               ),
             ),
-            AbsorbPointer(
-                absorbing: true,
-                child: feild(
-                    controller: TextEditingController(),
-                    hintText: "OperatorId")),
+            GetBuilder<CheckoutController>(builder: (_) {
+              return AbsorbPointer(
+                  absorbing: true,
+                  child: feild(
+                      controller:
+                          TextEditingController(text: checkoutController.mmid),
+                      hintText: "OperatorId"));
+            }),
             feild(controller: TextEditingController(), hintText: "Full Name"),
             Row(
               children: [
@@ -52,8 +60,8 @@ class OrderCheckout extends StatelessWidget {
                         controller: TextEditingController(), hintText: "Email"))
               ],
             ),
-         const   Padding(
-              padding:  EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 "Order Summary:",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
@@ -64,15 +72,15 @@ class OrderCheckout extends StatelessWidget {
             summaryitem(item: "Taxes", value: "13.99"),
             summaryitem(
                 item: "Discount", value: "39.99", color: Colors.green[700]),
-       const     Divider(),
+            const Divider(),
             summaryitem(item: "Total", value: "180.98", size: 17),
-    const        Divider(),
-         const   Padding(
+            const Divider(),
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
                   "We will send the confirmation when your item(s) are on the way! Hope you enjoy your purchase"),
             ),
-          const  Padding(
+            const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text("Thank you!"),
             ),
@@ -82,7 +90,9 @@ class OrderCheckout extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(PaymentPage());
+                  },
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,
                     child: Container(
@@ -95,8 +105,8 @@ class OrderCheckout extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children:const [
-                             Center(
+                          children: [
+                            const Center(
                                 child: Text(
                               "Pay",
                               style: TextStyle(
