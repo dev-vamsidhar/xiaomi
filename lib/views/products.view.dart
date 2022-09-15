@@ -312,8 +312,34 @@ class _ProductSelectionState extends State<ProductSelection> {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: InkWell(
                       onTap: () {
+                        if (item == null && category == null) {
+                          toast("Select category and product.");
+                          return;
+                        }
+                        if (color.text.isEmpty ||
+                            quantity.text.isEmpty ||
+                            serainumber.text.isEmpty) {
+                          toast("All feilds are necessary to proceed.");
+                          return;
+                        }
+
+                        CartModel cart = CartModel(
+                            url: "",
+                            title: "$item-$category",
+                            color: color.text,
+                            size: size.text,
+                            price: "\$4923.00",
+                            quantity: quantity.text,
+                            homedelivery: homedelivery.toString(),
+                            addressline1: addressline1.text,
+                            state: state.text,
+                            country: country.text,
+                            landmark: landmark.text,
+                            pincode: pincode.text);
                         // _cartController.deleteall();
-                        Get.to(OrderCheckout());
+                        Get.to(OrderCheckout(
+                          cartdata: cart,
+                        ));
                         return;
                       },
                       child: MouseRegion(

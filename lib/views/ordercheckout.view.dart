@@ -3,15 +3,20 @@ import 'package:frontend/controllers/checkout.controller.dart';
 import 'package:frontend/helpers/hive.helper.dart';
 import 'package:frontend/helpers/logger.dart';
 import 'package:frontend/helpers/widgets.helper.dart';
+import 'package:frontend/model/cart.model.dart';
 import 'package:frontend/views/payment.view.dart';
 import 'package:get/get.dart';
 
 class OrderCheckout extends StatelessWidget {
-  const OrderCheckout({super.key});
+  const OrderCheckout({super.key, required this.cartdata});
+  final CartModel cartdata;
 
   @override
   Widget build(BuildContext context) {
     CheckoutController checkoutController = Get.put(CheckoutController());
+    TextEditingController name = TextEditingController();
+    TextEditingController phone = TextEditingController();
+    TextEditingController email = TextEditingController();
     return Builder(builder: (context) {
       return Scaffold(
         appBar: AppBar(
@@ -48,16 +53,11 @@ class OrderCheckout extends StatelessWidget {
                           TextEditingController(text: checkoutController.mmid),
                       hintText: "OperatorId"));
             }),
-            feild(controller: TextEditingController(), hintText: "Full Name"),
+            feild(controller: name, hintText: "Full Name"),
             Row(
               children: [
-                Expanded(
-                    child: feild(
-                        controller: TextEditingController(),
-                        hintText: "Phone")),
-                Expanded(
-                    child: feild(
-                        controller: TextEditingController(), hintText: "Email"))
+                Expanded(child: feild(controller: phone, hintText: "Phone")),
+                Expanded(child: feild(controller: email, hintText: "Email"))
               ],
             ),
             const Padding(
@@ -91,7 +91,18 @@ class OrderCheckout extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 child: InkWell(
                   onTap: () {
-                    Get.to(PaymentPage());
+                    if (name.text.isEmpty ||
+                        phone.text.isEmpty ||
+                        email.text.isEmpty) {
+                      toast("Name/Phone/Email should not be empty.");
+                      return;
+                    }
+                    Get.to(PaymentPage(
+                      cartdata: cartdata,
+                      name: name.text,
+                      phone: phone.text,
+                      email: email.text,
+                    ));
                   },
                   child: MouseRegion(
                     cursor: SystemMouseCursors.click,

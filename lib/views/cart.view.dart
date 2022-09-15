@@ -69,7 +69,10 @@ class Cart extends StatelessWidget {
                                             children: [
                                               InkWell(
                                                 onTap: () {
-                                                  Get.to(OrderCheckout());
+                                                  Get.to(OrderCheckout(
+                                                    cartdata:
+                                                        _.cartitems[index],
+                                                  ));
                                                 },
                                                 child: Text(
                                                     _.cartitems[index].title,
@@ -105,7 +108,7 @@ class Cart extends StatelessWidget {
                                                             .cartitems[index]
                                                             .id);
                                                       },
-                                                      child:const Text(
+                                                      child: const Text(
                                                         "Delete",
                                                         style: TextStyle(
                                                             color:

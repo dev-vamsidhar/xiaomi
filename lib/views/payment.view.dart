@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants/constants.dart';
 import 'package:frontend/controllers/checkout.controller.dart';
+import 'package:frontend/model/cart.model.dart';
+import 'package:frontend/model/ordermodel.dart';
 import 'package:frontend/views/paymentstatus.view.dart';
 import 'package:get/get.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  const PaymentPage({Key? key,required this.cartdata,required this.name,required this.email,required this.phone}) : super(key: key);
+  final CartModel cartdata;
+  final String name;
+  final String email;
+  final String phone;
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -20,15 +26,17 @@ class _PaymentPageState extends State<PaymentPage> {
     final isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: isSmallScreen
-          ? AppBar(
-              centerTitle: true,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              title:const Text("Payment"),
-            )
-          : null,
+      // backgroundColor: Colors.white,
+      appBar: AppBar(
+        centerTitle: true,
+        // backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text(
+          "Payment",
+          style: TextStyle(fontSize: 17),
+        ),
+      ),
       body: Builder(builder: (context) {
         final isSmallScreen = MediaQuery.of(context).size.width < 600;
         return Padding(
@@ -71,7 +79,7 @@ class _PaymentPageState extends State<PaymentPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
                               width: isSmallScreen ? 200 : 500,
-                              child:const Text(
+                              child: const Text(
                                   "Online Payment mode(Debit/Credit/UPI/Net Banking")),
                         ),
                       ],
@@ -86,7 +94,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               setState(() {});
                             }),
                         const Padding(
-                          padding:  EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0),
                           child: Text("Cash on delivery"),
                         ),
                       ],
@@ -127,11 +135,10 @@ class _PaymentPageState extends State<PaymentPage> {
                                                   color: Colors.grey,
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
-                                              child:const  Padding(
-                                                padding:
-                                                     EdgeInsets.symmetric(
-                                                        horizontal: 10,
-                                                        vertical: 8),
+                                              child: const Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 8),
                                                 child: Text(
                                                   "Fail",
                                                   style: TextStyle(
@@ -143,6 +150,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                           sw10,
                                           InkWell(
                                             onTap: () {
+                                              controller.saveorder(widget.cartdata, widget.name, widget.phone, widget.email, OrderModel(subtotal: "199.99", shipping: "6.99", taxes: "13.99", discount: "39.99", total: "180.98"));
                                               Get.back();
                                               Get.to(const PaymentStatus(
                                                 paymentstatus: true,
@@ -153,9 +161,8 @@ class _PaymentPageState extends State<PaymentPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(8),
                                                   color: Colors.orange),
-                                              child:const Padding(
-                                                padding:
-                                                     EdgeInsets.all(8.0),
+                                              child: const Padding(
+                                                padding: EdgeInsets.all(8.0),
                                                 child: Text(
                                                   "Sucess",
                                                   style: TextStyle(
@@ -176,7 +183,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.orange),
-                                  child:const Padding(
+                                  child: const Padding(
                                     padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       "Proceed to payment",

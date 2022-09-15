@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:frontend/helpers/apicalls.dart';
+import 'package:frontend/helpers/logger.dart';
 import 'package:frontend/model/cart.model.dart';
 import 'package:frontend/model/ordermodel.dart';
 import 'package:frontend/views/auth.view.dart';
@@ -24,5 +27,21 @@ class CheckoutController extends GetxController {
   }
 
   Future saveorder(CartModel cartdata, String fullname, String phone,
-      String email, OrderModel ordermodel) async {}
+      String email, OrderModel ordermodel) async {
+    try {
+      loading();
+      Map<String, dynamic> body = {};
+      body.addAll(cartdata.tojson(cartdata));
+      body['name'] = fullname;
+      body['phone'] = phone;
+      body['email'] = email;
+      body['miid'] = await getKey(key: "miid");
+      Map<String, dynamic> paymentdetails = ordermodel.tojson(ordermodel);
+      await postCall(postUrlpath: "app/createorder", body: body);
+      dismissloading();
+    } catch (e) {
+      dismissloading();
+      toast("Something went wrong at our side. Please try again later");
+    }
+  }
 }

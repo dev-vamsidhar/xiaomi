@@ -1,6 +1,8 @@
 import 'package:frontend/constants/server.constants.dart';
 import 'package:frontend/controllers/cart.controller.dart';
+import 'package:frontend/controllers/orders.controller.dart';
 import 'package:frontend/helpers/apicalls.dart';
+import 'package:frontend/helpers/connectivity.helper.dart';
 import 'package:frontend/helpers/hive.helper.dart';
 import 'package:frontend/helpers/logger.dart';
 import 'package:frontend/views/home.view.dart';
@@ -17,6 +19,12 @@ class AuthenticationController extends GetxController {
       {required String email, required String password}) async {
     Map<String, String> body = {"miid": email, "password": password};
     loading();
+    bool hasinternet = await ConnectivityController().checkdataconnection();
+    if (!hasinternet) {
+      toast(
+          "Please internet connection. Internet is required at the time of login");
+      return;
+    }
     Map<String, dynamic> data =
         await postCall(postUrlpath: loginpath, body: body);
     if (data.isNotEmpty) {
@@ -90,12 +98,13 @@ class AuthenticationController extends GetxController {
         setKey(key: "storetype", value: res["data"][0]['storetype']);
         setKey(key: "posid", value: res["data"][0]['posid']);
       }
-    } else {  
+    } else {
       toast("Something went wrong while fetching data. Please try again later");
     }
 
     ///Get past order
-    ///Need to ready the api
+    await Get.find<OrderController>().getEmployeeOrderFromApi();
+
     ///
   }
 }
