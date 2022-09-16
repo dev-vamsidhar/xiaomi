@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:frontend/helpers/hive.helper.dart';
 import 'package:frontend/views/auth.view.dart';
@@ -7,10 +8,16 @@ import 'package:frontend/views/products.view.dart';
 import 'package:get/get.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
+
   final _key = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,6 +51,18 @@ class HomePage extends StatelessWidget {
                     elevation: 0,
                     backgroundColor: Colors.grey[50],
                     centerTitle: true,
+                    actions: [
+                      InkWell(
+                        onTap: () {
+                          _controller.selectIndex(2);
+                          setState(() {});
+                        },
+                        child:const Padding(
+                          padding:  EdgeInsets.all(8.0),
+                          child: Icon(Icons.shopping_bag_outlined),
+                        ),
+                      )
+                    ],
                     title: const Text(
                       "HomePage",
                       style: TextStyle(color: Colors.black, fontSize: 15),

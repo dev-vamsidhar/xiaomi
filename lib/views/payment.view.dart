@@ -7,7 +7,13 @@ import 'package:frontend/views/paymentstatus.view.dart';
 import 'package:get/get.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key,required this.cartdata,required this.name,required this.email,required this.phone}) : super(key: key);
+  const PaymentPage(
+      {Key? key,
+      required this.cartdata,
+      required this.name,
+      required this.email,
+      required this.phone})
+      : super(key: key);
   final CartModel cartdata;
   final String name;
   final String email;
@@ -150,7 +156,17 @@ class _PaymentPageState extends State<PaymentPage> {
                                           sw10,
                                           InkWell(
                                             onTap: () {
-                                              controller.saveorder(widget.cartdata, widget.name, widget.phone, widget.email, OrderModel(subtotal: "199.99", shipping: "6.99", taxes: "13.99", discount: "39.99", total: "180.98"));
+                                              controller.saveorder(
+                                                  widget.cartdata,
+                                                  widget.name,
+                                                  widget.phone,
+                                                  widget.email,
+                                                  OrderModel(
+                                                      subtotal: "199.99",
+                                                      shipping: "6.99",
+                                                      taxes: "13.99",
+                                                      discount: "39.99",
+                                                      total: "180.98"));
                                               Get.back();
                                               Get.to(const PaymentStatus(
                                                 paymentstatus: true,
