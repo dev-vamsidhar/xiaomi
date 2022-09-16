@@ -4,7 +4,11 @@
 
 
 Our application is a cloud-enabled, mobile-ready, offline-storage compatible,
-
+## Test Credentials
+MiID :- 123456 
+Password : - xiaomipass
+Above creadentials is for the fresh account
+**As it is realted to sales signup is  disabled for the current application**
 
 ## Features
 
