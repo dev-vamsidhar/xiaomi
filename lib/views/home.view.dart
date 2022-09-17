@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/auth.controller.dart';
 import 'package:frontend/controllers/orders.controller.dart';
 import 'package:frontend/helpers/hive.helper.dart';
 import 'package:frontend/views/auth.view.dart';
@@ -221,6 +222,45 @@ class _Screens extends StatelessWidget {
             );
           case 2:
             return Cart();
+          case 3:
+            return GetBuilder<AuthenticationController>(
+                init: AuthenticationController(),
+                builder: (_) {
+                  return Builder(builder: (context) {
+                    final isSmallScreen =
+                        MediaQuery.of(context).size.width < 800;
+                    return Scaffold(
+                      appBar: isSmallScreen
+                          ? AppBar(
+                              centerTitle: true,
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              title: Text(
+                                "Profile",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            )
+                          : null,
+                      body: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "MiId",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(_.miid.toString())
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  });
+                });
           case 5:
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,

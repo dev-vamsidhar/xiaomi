@@ -12,7 +12,15 @@ import 'package:get/get.dart';
 class AuthenticationController extends GetxController {
   @override
   void onInit() {
+    getmiid();
     super.onInit();
+  }
+
+  String miid = "";
+  void getmiid() async {
+    miid = await getKey(key: "miid");
+    log(miid);
+    update();
   }
 
   void signInWithEmail(
@@ -30,6 +38,7 @@ class AuthenticationController extends GetxController {
     if (data.isNotEmpty) {
       if (data.containsKey("miid")) {
         await setKey(key: 'token', value: data['token']);
+        miid = data['miid'];
         await setKey(key: 'miid', value: data['miid']);
         await getuserinitialdata();
         String storename = await getKey(key: "storename");
