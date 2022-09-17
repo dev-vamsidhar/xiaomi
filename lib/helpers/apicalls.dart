@@ -48,7 +48,7 @@ Future getcallscache() async {
   try {
     Box box = await Hive.openBox("cache");
     Iterable<dynamic> keys = box.keys;
-    log("someithing");
+
     for (var element in keys) {
       var data = box.get(element);
       Map<String, dynamic> body = {};

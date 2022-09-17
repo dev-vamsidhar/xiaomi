@@ -35,7 +35,15 @@ class _PreviousOrderState extends State<PreviousOrder> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image.network(
-                                "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71k86pEH5LS._AC_AA180_.jpg",
+                                _.pastorder[index]['title']
+                                        .toString()
+                                        .contains("Smart Phone")
+                                    ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91kAtEXPIeL._AC_UY218_.jpg"
+                                    : _.pastorder[index]['title']
+                                            .toString()
+                                            .contains("TV")
+                                        ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71g3OF4CL9L._AC_SR180,120_QL70_.jpg"
+                                        : "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71WFtb0oEvL._AC_UY218_.jpg ",
                                 height: isSmallScreen
                                     ? Get.width / 5
                                     : Get.width / 10,

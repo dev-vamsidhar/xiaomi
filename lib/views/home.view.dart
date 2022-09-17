@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/orders.controller.dart';
 import 'package:frontend/helpers/hive.helper.dart';
 import 'package:frontend/views/auth.view.dart';
 import 'package:frontend/views/cart.view.dart';
@@ -27,61 +27,79 @@ class _HomePageState extends State<HomePage> {
       home: Builder(
         builder: (context) {
           final isSmallScreen = MediaQuery.of(context).size.width < 600;
-          return Scaffold(
-            backgroundColor: Colors.grey[50],
-            floatingActionButton:
-                isSmallScreen && _controller.selectedIndex == 0
-                    ? FloatingActionButton(
-                        tooltip: "Create Order",
-                        onPressed: () {
-                          Get.to(ProductSelection(
-                            sidebarcontroller: _controller,
-                          ));
-                        },
-                        backgroundColor: Colors.orange,
-                        child: const Icon(
-                          Icons.add,
-                          size: 30,
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.grey[50],
+              floatingActionButton:
+                  isSmallScreen && _controller.selectedIndex == 0
+                      ? FloatingActionButton(
+                          tooltip: "Create Order",
+                          onPressed: () {
+                            Get.to(ProductSelection(
+                              sidebarcontroller: _controller,
+                            ));
+                          },
+                          backgroundColor: Colors.orange,
+                          child: const Icon(
+                            Icons.add,
+                            size: 30,
+                          ),
+                        )
+                      : null,
+              key: _key,
+              appBar: isSmallScreen && _controller.selectedIndex == 0
+                  ? AppBar(
+                      elevation: 0,
+                      backgroundColor: Colors.grey[50],
+                      centerTitle: true,
+                      actions: [
+                        InkWell(
+                          onTap: () {
+                            // _controller.selectIndex(2);
+                            // setState(() {});
+                            Get.to(Cart());
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.shopping_bag_outlined),
+                          ),
                         ),
-                      )
-                    : null,
-            key: _key,
-            appBar: isSmallScreen && _controller.selectedIndex == 0
-                ? AppBar(
-                    elevation: 0,
-                    backgroundColor: Colors.grey[50],
-                    centerTitle: true,
-                    actions: [
-                      InkWell(
+                        InkWell(
+                          onTap: () {
+                            cleardb();
+                            Get.offAll(Auth());
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.logout),
+                          ),
+                        )
+                      ],
+                      title: InkWell(
                         onTap: () {
-                          _controller.selectIndex(2);
-                          setState(() {});
+                          OrderController().getEmployeeOrderFromApi();
                         },
-                        child:const Padding(
-                          padding:  EdgeInsets.all(8.0),
-                          child: Icon(Icons.shopping_bag_outlined),
+                        child: const Text(
+                          "HomePage",
+                          style: TextStyle(color: Colors.black, fontSize: 15),
                         ),
-                      )
-                    ],
-                    title: const Text(
-                      "HomePage",
-                      style: TextStyle(color: Colors.black, fontSize: 15),
-                    ),
-                    iconTheme: const IconThemeData(color: Colors.black),
-                  )
-                : null,
-            // drawer: SideBar(controller: _controller),
-            body: Row(
-              children: [
-                if (!isSmallScreen) SideBar(controller: _controller),
-                Expanded(
-                  child: Center(
-                    child: _Screens(
-                      controller: _controller,
+                      ),
+                      iconTheme: const IconThemeData(color: Colors.black),
+                    )
+                  : null,
+              // drawer: SideBar(controller: _controller),
+              body: Row(
+                children: [
+                  if (!isSmallScreen) SideBar(controller: _controller),
+                  Expanded(
+                    child: Center(
+                      child: _Screens(
+                        controller: _controller,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

@@ -17,10 +17,11 @@ class OrderController extends GetxController {
       String miid = await getKey(key: "miid");
       Map<String, dynamic> res =
           await postCall(postUrlpath: "app/getorders", body: {"miid": miid});
+      log("ok");
       if (res['status'] != null) {
         await setKey(key: "pastorders", value: res['data']);
-        getEmployeeOrderFromDb();
       }
+      getEmployeeOrderFromDb();
       update();
     } catch (e) {
       toast("Something went wrong while fetching order.Please try again later");
@@ -31,6 +32,7 @@ class OrderController extends GetxController {
     bool hasdata = await haskey(key: "pastorders");
     if (hasdata) {
       pastorder = await getKey(key: "pastorders");
+      log(pastorder);
       update();
     }
   }
