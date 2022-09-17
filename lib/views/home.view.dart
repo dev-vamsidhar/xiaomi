@@ -6,6 +6,7 @@ import 'package:frontend/views/cart.view.dart';
 import 'package:frontend/views/previousorder.view.dart';
 import 'package:frontend/views/products.view.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 class HomePage extends StatefulWidget {
@@ -221,18 +222,33 @@ class _Screens extends StatelessWidget {
           case 2:
             return Cart();
           case 5:
-            return InkWell(
-              onTap: () {
-                cleardb();
-                Get.offAll(Auth());
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.grey),
-                  child: Text("Logout"),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset("assets/lotties/logout.json",
+                    height: Get.height / 3),
+                InkWell(
+                  onTap: () {
+                    cleardb();
+                    Get.offAll(Auth());
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Logout",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             );
           default:
             return Text(

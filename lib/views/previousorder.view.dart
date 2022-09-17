@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frontend/constants/constants.dart';
 import 'package:frontend/controllers/orders.controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 class PreviousOrder extends StatefulWidget {
   const PreviousOrder({Key? key}) : super(key: key);
@@ -34,19 +33,22 @@ class _PreviousOrderState extends State<PreviousOrder> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.network(
-                                _.pastorder[index]['title']
-                                        .toString()
-                                        .contains("Smart Phone")
-                                    ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91kAtEXPIeL._AC_UY218_.jpg"
-                                    : _.pastorder[index]['title']
-                                            .toString()
-                                            .contains("TV")
-                                        ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71g3OF4CL9L._AC_SR180,120_QL70_.jpg"
-                                        : "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71WFtb0oEvL._AC_UY218_.jpg ",
-                                height: isSmallScreen
-                                    ? Get.width / 5
-                                    : Get.width / 10,
+                              Container(
+                                width: 100,
+                                child: Image.network(
+                                  _.pastorder[index]['title']
+                                          .toString()
+                                          .contains("Smart Phone")
+                                      ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91kAtEXPIeL._AC_UY218_.jpg"
+                                      : _.pastorder[index]['title']
+                                              .toString()
+                                              .contains("TV")
+                                          ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71g3OF4CL9L._AC_SR180,120_QL70_.jpg"
+                                          : "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71f6IcLBM6L._AC_UY218_.jpg",
+                                  height: isSmallScreen
+                                      ? Get.width / 5
+                                      : Get.width / 10,
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -55,7 +57,7 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: Get.width / 2,
                                         child: InkWell(
                                           onTap: () {
@@ -99,9 +101,9 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text("\$1980.00"),
+                                                const Text("\$1980.00"),
                                                 sh10,
-                                                Text(
+                                                const Text(
                                                   "Status: Completed",
                                                   style: TextStyle(
                                                       color: Colors.green),
@@ -116,9 +118,9 @@ class _PreviousOrderState extends State<PreviousOrder> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("\$1980.00"),
+                                        const Text("\$1980.00"),
                                         sh10,
-                                        Text(
+                                        const Text(
                                           "Status: Completed",
                                           style: TextStyle(color: Colors.green),
                                         ),
@@ -135,7 +137,7 @@ class _PreviousOrderState extends State<PreviousOrder> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("No Orders done"),
+                    const Text("No Orders done"),
                     sh10,
                     InkWell(
                       onTap: () {
@@ -145,8 +147,8 @@ class _PreviousOrderState extends State<PreviousOrder> {
                         decoration: BoxDecoration(
                             color: Colors.orange,
                             borderRadius: BorderRadius.circular(5)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Refresh",
                             style: TextStyle(color: Colors.white),

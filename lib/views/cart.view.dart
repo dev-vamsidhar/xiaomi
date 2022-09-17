@@ -72,9 +72,22 @@ class Cart extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Image.network(
-                                              "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91kAtEXPIeL._AC_UY218_.jpg",
-                                              height: isSmallScreen ? 80 : 130,
+                                            Container(
+                                              width: 100,
+                                              child: Image.network(
+                                                _.cartitems[index].title
+                                                        .toString()
+                                                        .contains("Smart Phone")
+                                                    ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/91kAtEXPIeL._AC_UY218_.jpg"
+                                                    : _.cartitems[index].title
+                                                            .toString()
+                                                            .contains("TV")
+                                                        ? "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71g3OF4CL9L._AC_SR180,120_QL70_.jpg"
+                                                        : "https://m.media-amazon.com/images/W/WEBP_402378-T2/images/I/71f6IcLBM6L._AC_UY218_.jpg",
+                                                height: isSmallScreen
+                                                    ? Get.width / 5
+                                                    : Get.width / 10,
+                                              ),
                                             ),
                                             Padding(
                                               padding:

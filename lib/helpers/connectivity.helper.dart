@@ -36,6 +36,9 @@ class ConnectivityController extends GetxController {
 
   Future<bool> checkdataconnection() async {
     try {
+      if (GetPlatform.isWeb) {
+        return true;
+      }
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         log(result);
