@@ -252,6 +252,16 @@ class _ProductSelectionState extends State<ProductSelection> {
                     onTap: () async {
                       // _cartController.deleteall();
                       // return;
+                      if (item == null && category == null) {
+                        toast("Select category and product.");
+                        return;
+                      }
+                      if (color.text.isEmpty ||
+                          quantity.text.isEmpty ||
+                          serainumber.text.isEmpty) {
+                        toast("All feilds are necessary to proceed.");
+                        return;
+                      }
                       CartModel cart = CartModel(
                           url: "",
                           title: "$item-$category",

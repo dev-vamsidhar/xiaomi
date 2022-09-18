@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/constants/constants.dart';
 import 'package:frontend/controllers/auth.controller.dart';
+import 'package:frontend/helpers/logger.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -60,7 +61,7 @@ class Auth extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.orange,
                   borderRadius: BorderRadius.circular(10)),
-              child:const Center(
+              child: const Center(
                   child: Text(
                 "Log in",
                 style: TextStyle(color: Colors.white),
@@ -77,7 +78,7 @@ class Auth extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
-          boxShadow: const[
+          boxShadow: const [
             BoxShadow(
                 color: Colors.grey,
                 spreadRadius: 2,
@@ -119,8 +120,10 @@ class Auth extends StatelessWidget {
           MouseRegion(
               cursor: SystemMouseCursors.click,
               child: InkWell(
-                onTap: () {},
-                child:const Center(
+                onTap: () {
+                  toast("Currently this feature is disabled");
+                },
+                child: const Center(
                     child: Icon(
                   FontAwesomeIcons.google,
                   color: Colors.red,
@@ -130,5 +133,4 @@ class Auth extends StatelessWidget {
       ),
     );
   }
-
 }

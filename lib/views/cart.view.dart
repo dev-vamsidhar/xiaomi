@@ -12,6 +12,7 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _cartController.getCartItems();
     return SafeArea(
       child: Builder(builder: (context) {
         final isSmallScreen = MediaQuery.of(context).size.width < 800;

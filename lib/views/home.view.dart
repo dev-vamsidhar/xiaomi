@@ -270,6 +270,7 @@ class _Screens extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     cleardb();
+                    cleardb(boxname: 'cart');
                     Get.offAll(Auth());
                   },
                   child: Padding(
