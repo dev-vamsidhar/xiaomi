@@ -250,8 +250,6 @@ class _ProductSelectionState extends State<ProductSelection> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      // _cartController.deleteall();
-                      // return;
                       if (item == null && category == null) {
                         toast("Select category and product.");
                         return;
