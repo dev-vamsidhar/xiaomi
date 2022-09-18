@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.5
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  icons_launcher: ^2.0.5
   logger: ^1.1.0
   lottie: ^1.4.2
   neat_periodic_task: ^2.0.0
@@ -48,7 +49,21 @@ dependencies:
   shared_preferences: ^2.0.15
   sidebarx: ^0.11.0
   uuid: ^3.0.6
-
+icons_launcher:
+  image_path: "assets/logo.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
+    web:
+      enable: true
+    windows:
+      enable: true
+    linux:
+      enable: true
+    macos:
+      enable: true
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
