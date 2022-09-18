@@ -134,29 +134,34 @@ class _PreviousOrderState extends State<PreviousOrder> {
                     );
                   },
                 )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("No Orders done"),
-                    sh10,
-                    InkWell(
-                      onTap: () {
-                        _.getEmployeeOrderFromDb();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "Refresh",
-                            style: TextStyle(color: Colors.white),
+              : Container(
+                  // color: Colors.red,
+                  width: Get.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text("No Orders done"),
+                      sh10,
+                      InkWell(
+                        onTap: () {
+                          _.getEmployeeOrderFromDb();
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Refresh",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 );
         });
       }),
